@@ -1,8 +1,8 @@
-// Глобални променливи
+// Global variables
 let tasks = [];
 let taskIdCounter = 1;
 
-// DOM елементи
+// DOM elements
 const taskInput = document.getElementById('taskInput');
 const categorySelect = document.getElementById('categorySelect');
 const addBtn = document.getElementById('addBtn');
@@ -13,57 +13,57 @@ const totalTasks = document.getElementById('totalTasks');
 const completedTasks = document.getElementById('completedTasks');
 const remainingTasks = document.getElementById('remainingTasks');
 
-// Инициализация на приложението
+// Application initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Star Wars To-Do App started! 🚀');
     
-    // Зарежда запазените задачи
+    // Loads saved tasks
     loadTasks();
     
-    // Създава частици
+    // Creates particles
     createParticles();
     
-    // Задава начална тема
+    // Sets a starting topic
     document.body.classList.add('blue-theme');
     
-    // Добавя event listeners
+    // Adds event listeners
     setupEventListeners();
     
-    // Обновява статистиките
+    // Refreshes statistics
     updateStats();
 });
 
-// Функция за настройка на event listeners
+// Function for setting up event listeners
 function setupEventListeners() {
-    // Добавяне на задача с Enter
+    // Add task with Enter
     taskInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             addTask();
         }
     });
     
-    // Добавяне на задача с бутон
+    // Add a task with a button
     addBtn.addEventListener('click', addTask);
     
-    // Генериране на случайна задача
+    // Generate a random task
     generateBtn.addEventListener('click', generateTask);
     
-    // Смяна на цветова тема
+    // Change color theme
     colorBtn.addEventListener('click', changeColorTheme);
 }
 
-// Функция за добавяне на задача
+// Add task function
 function addTask() {
     const taskText = taskInput.value.trim();
     const category = categorySelect.value;
     
-    // Проверка дали има въведен текст
+    // Checking for entered text
     if (taskText === '') {
         alert('Please, enter a task!');
         return;
     }
     
-    // Създава нов обект за задача
+    // Creates a new task object
     const newTask = {
         id: taskIdCounter++,
         text: taskText,
@@ -72,13 +72,13 @@ function addTask() {
         createdAt: new Date().toLocaleString('bg-BG')
     };
     
-    // Добавя задачата в масива
+    // Adds the task to the array
     tasks.push(newTask);
     
-    // Изчиства input полето
+    // Clears the input field
     taskInput.value = '';
     
-    // Обновява интерфейса
+    // Refreshes the interface
     renderTasks();
     updateStats();
     saveTasks();
@@ -86,11 +86,11 @@ function addTask() {
     console.log('Added task:', newTask);
 }
 
-// Функция за генериране на случайна задача
+// Random task generation function
 function generateTask() {
     const randomTaskData = generateRandomTask();
     
-    // Създава нов обект за задача
+    // Creates a new task object
     const newTask = {
         id: taskIdCounter++,
         text: randomTaskData.task,
@@ -99,10 +99,10 @@ function generateTask() {
         createdAt: new Date().toLocaleString('bg-BG')
     };
     
-    // Добавя задачата в масива
+    // Adds the task to the array
     tasks.push(newTask);
     
-    // Обновява интерфейса
+    //Refreshes the interface
     renderTasks();
     updateStats();
     saveTasks();
@@ -110,31 +110,31 @@ function generateTask() {
     console.log('Generated task:', newTask);
 }
 
-// Функция за рендериране на задачите
+// Task rendering function
 function renderTasks() {
-    // Изчиства списъка
+    // Clears the list
     tasksList.innerHTML = '';
     
-    // Ако няма задачи, показва съобщение
+    // If there are no tasks, displays a message
     if (tasks.length === 0) {
         tasksList.innerHTML = '<li class="no-tasks">There are no tasks. Add a new task or generate a random one! 🌟</li>';
         return;
     }
     
-    // Създава HTML за всяка задача
+    // Creates HTML for each task
     tasks.forEach(task => {
         const taskItem = createTaskElement(task);
         tasksList.appendChild(taskItem);
     });
 }
 
-// Функция за създаване на HTML елемент за задача
+// Function to create an HTML element for a task
 function createTaskElement(task) {
     const li = document.createElement('li');
     li.className = `task-item ${task.completed ? 'completed' : ''}`;
     li.setAttribute('data-id', task.id);
     
-    // Взима иконата на категорията
+    // Gets the category icon
     const categoryIcon = STAR_WARS_CATEGORIES[task.category].icon;
     
     li.innerHTML = `
@@ -155,7 +155,7 @@ function createTaskElement(task) {
     return li;
 }
 
-// Функция за превключване на състоянието на задача
+// Task status toggle function
 function toggleTask(taskId) {
     const task = tasks.find(t => t.id === taskId);
     if (task) {
@@ -167,9 +167,9 @@ function toggleTask(taskId) {
     }
 }
 
-// Функция за изтриване на задача
+// Task delete function
 function deleteTask(taskId) {
-    // Потвърждение за изтриване
+    // Delete confirmation
     if (confirm('Are you sure that you want to delete this task?')) {
         tasks = tasks.filter(t => t.id !== taskId);
         renderTasks();
@@ -179,7 +179,7 @@ function deleteTask(taskId) {
     }
 }
 
-// Функция за обновяване на статистиките
+// Statistics update function
 function updateStats() {
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
@@ -190,7 +190,7 @@ function updateStats() {
     remainingTasks.textContent = remaining;
 }
 
-// Функция за запазване на задачи в localStorage
+// Function to save tasks in localStorage
 function saveTasks() {
     try {
         localStorage.setItem('starWarsTasks', JSON.stringify(tasks));
@@ -201,7 +201,7 @@ function saveTasks() {
     }
 }
 
-// Функция за зареждане на задачи от localStorage
+// Function to load tasks from localStorage
 function loadTasks() {
     try {
         const savedTasks = localStorage.getItem('starWarsTasks');
@@ -223,7 +223,7 @@ function loadTasks() {
     }
 }
 
-// Функция за изчистване на всички задачи (за debugging)
+// Function to clear all tasks (for debugging)
 function clearAllTasks() {
     if (confirm('Are you sure that you want to delete all tasks?')) {
         tasks = [];
@@ -235,7 +235,7 @@ function clearAllTasks() {
     }
 }
 
-// Функция за експортиране на задачите (бонус функция)
+// Task export function (bonus feature)
 function exportTasks() {
     const dataStr = JSON.stringify(tasks, null, 2);
     const dataBlob = new Blob([dataStr], {type: 'application/json'});
@@ -247,7 +247,7 @@ function exportTasks() {
     console.log('The tasks are exported');
 }
 
-// Добавя функции в конзолата за debugging
+// Adds features to the debugging console
 window.debugFunctions = {
     clearAllTasks,
     exportTasks,
