@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Главен контейнер -->
+    <div class="container">
+        <!-- Заглавие -->
+        <header class="header">
+            <h1 class="title">⚔️ Star Wars To-Do List ⚔️</h1>
+            <p class="subtitle">Organize your tasks like a true Jedi!</p>
+        </header>
+
+        <!-- Контролен панел -->
+        <div class="controls">
+            <!-- Бутон за смяна на цвета -->
+            <button class="btn btn-color" id="colorBtn">🎨 Change color</button>
+            
+            <!-- Бутон за генериране на задача -->
+            <button class="btn btn-generate" id="generateBtn">✨ Generate task</button>
+        </div>
+
+        <!-- Форма за добавяне на задача -->
+        <div class="task-form">
+            <input type="text" id="taskInput" placeholder="Enter new task..." class="task-input">
+            
+            <!-- Избор на категория -->
+            <select id="categorySelect" class="category-select">
+                <option value="characters">👤 Characters</option>
+                <option value="species">🐾 Species</option>
+                <option value="planets">🌍 Planets</option>
+                <option value="vehicles">🚗 Vehicles</option>
+                <option value="starships">🚀 Starships</option>
+            </select>
+            
+            <button class="btn btn-add" id="addBtn">➕ Add a task</button>
+        </div>
+
+        <!-- Списък със задачи -->
+        <div class="tasks-container">
+            <h2 class="tasks-title">Your tasks:</h2>
+            <ul class="tasks-list" id="tasksList">
+                <!-- Задачите ще се добавят тук динамично -->
+            </ul>
+        </div>
+
+        <!-- Статистики -->
+        <div class="stats">
+            <span class="stat">📝 All: <span id="totalTasks">0</span></span>
+            <span class="stat">✅ Completed: <span id="completedTasks">0</span></span>
+            <span class="stat">⏳ Remaining: <span id="remainingTasks">0</span></span>
+        </div>
+    </div>
+
+    <!-- JavaScript файлове -->
+    <script src="categories.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
