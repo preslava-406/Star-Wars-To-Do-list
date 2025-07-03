@@ -1,4 +1,4 @@
-// Star Wars категории с икони и примерни задачи
+// Star Wars categories with icons and sample tasks
 const STAR_WARS_CATEGORIES = {
     characters: {
         icon: "👤",
@@ -107,7 +107,7 @@ const STAR_WARS_CATEGORIES = {
     }
 };
 
-// Цветови теми за lightsaber ефекта
+// Color themes for the lightsaber effect
 const COLOR_THEMES = [
     'blue-theme',    // Luke Skywalker
     'red-theme',     // Darth Vader / Sith
@@ -116,13 +116,13 @@ const COLOR_THEMES = [
     'orange-theme'   // Unique combination
 ];
 
-// Функция за генериране на случайна задача
+// A funcyion for random task generating
 function generateRandomTask() {
     // Избира случайна категория
     const categoryKeys = Object.keys(STAR_WARS_CATEGORIES);
     const randomCategory = categoryKeys[Math.floor(Math.random() * categoryKeys.length)];
     
-    // Избира случайна задача от категорията
+    // Chooses a random task from the category
     const categoryTasks = STAR_WARS_CATEGORIES[randomCategory].tasks;
     const randomTask = categoryTasks[Math.floor(Math.random() * categoryTasks.length)];
     
@@ -133,47 +133,47 @@ function generateRandomTask() {
     };
 }
 
-// Функция за смяна на цветова тема
+// Function for color theme changing
 function changeColorTheme() {
     const currentTheme = document.body.className;
     const currentIndex = COLOR_THEMES.indexOf(currentTheme);
     const nextIndex = (currentIndex + 1) % COLOR_THEMES.length;
     
-    // Премахва старата тема
+    // Removing the old theme
     document.body.className = '';
     
     // Добавя новата тема
     document.body.classList.add(COLOR_THEMES[nextIndex]);
     
-    // Генерира нови частици с новия цвят
+    // Generating particles with the new color
     createParticles();
 }
 
-// Функция за създаване на анимирани частици
+// Function for generating new particles
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     
-    // Изчиства старите частици
+    // Clears old particles
     particlesContainer.innerHTML = '';
     
-    // Създава нови частици
+    // Creates new particles
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        // Случайна позиция
+        // Random position
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
         
-        // Случайно забавяне на анимацията
+        // Random delay of the animation
         particle.style.animationDelay = Math.random() * 6 + 's';
         
-        // Случайна скорост на анимацията
+        // Random speed of the animation
         particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
         
         particlesContainer.appendChild(particle);
     }
 }
 
-// Експортираме функциите за използване в script.js
-// (В браузъра няма модулна система, така че просто ги правим глобални)
+// Export the functions for use in script.js
+// (There is no module system in the browser, so we just make them global)
